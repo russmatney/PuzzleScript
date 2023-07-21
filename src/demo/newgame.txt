@@ -13,13 +13,20 @@ Blue
 00000
 .000.
 
-
 Platform
 Green
 .000.
-00000
-00.00
-00000
+0...0
+0...0
+0...0
+.000.
+
+Target
+Red
+.000.
+0...0
+0...0
+0...0
 .000.
 
 Background
@@ -32,35 +39,48 @@ LEGEND
 . = Background
 p = Player
 o = Platform
+t = Target
+
+pt = Platform or Target
 
 =======
 SOUNDS
 =======
+
+sfx0 50392900 (platform sound)
 
 ================
 COLLISIONLAYERS
 ================
 
 Background
-Player, Platform
+Player, pt
 
 ======
 RULES
 ======
 
-[ > Player | ... | Platform ] -> [ | ... | Player ]
+(TODO force finish on target)
+(TODO prevent going backwards)
+
+[ > Player | ... | pt ] -> [ | ... | Player ] sfx0
 [ > Player ] -> [ Player ]
 
 ==============
 WINCONDITIONS
 ==============
 
-No Platform
+No pt
 
 =======
 LEVELS
 =======
 
-...o...
+...o..t
 .p...o.
 ...o.o.
+
+.o.o...
+.p.....
+...o.o.
+.o...o.
