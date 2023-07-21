@@ -1,0 +1,66 @@
+title New Game
+author Russell Matney
+
+========
+OBJECTS
+========
+
+Player
+Blue
+.000.
+00000
+00.00
+00000
+.000.
+
+
+Platform
+Green
+.000.
+00000
+00.00
+00000
+.000.
+
+Background
+Black
+
+=======
+LEGEND
+=======
+
+. = Background
+p = Player
+o = Platform
+
+=======
+SOUNDS
+=======
+
+================
+COLLISIONLAYERS
+================
+
+Background
+Player, Platform
+
+======
+RULES
+======
+
+[ > Player | ... | Platform ] -> [ | ... | Player ]
+[ > Player ] -> [ Player ]
+
+==============
+WINCONDITIONS
+==============
+
+No Platform
+
+=======
+LEVELS
+=======
+
+...o...
+.p...o.
+...o.o.
