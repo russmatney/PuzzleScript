@@ -15,13 +15,29 @@ Blue
 00000
 .000.
 
-LastPlayerSpot
+TrailBlock
+Purple
+.000.
+0...0
+0...0
+0...0
+.000.
+
+TrailOld
 Gray
 .000.
 00000
 00.00
 00000
 .000.
+
+Prev
+Red
+..0..
+..0..
+00000
+..0..
+..0..
 
 Platform
 Green
@@ -56,12 +72,8 @@ LEGEND
 
 . = Background
 p = Player
-l = LastPlayerSpot
 o = Platform
-u = PlatformUsed
 t = Target
-
-pt = Platform or Target
 
 =======
 SOUNDS
@@ -75,7 +87,9 @@ COLLISIONLAYERS
 
 Background
 Platform, PlatformUsed, Target
-Player, LastPlayerSpot
+Player
+TrailOld, TrailBlock
+Prev
 
 ======
 RULES
@@ -84,25 +98,22 @@ RULES
 (TODO prevent going backwards)
 (TODO clear last player spot)
 
-(clear lastplayerspot)
-[ Player | ... | LastPlayerSpot ] -> [ Player | ... | ]
-
-(prevent movement if last player spot in direction)
-[ > Player | ... | LastPlayerSpot ] -> [ Player | ... | LastPlayerSpot ] sfx0
-
-(move to target, leaving last spot)
-[ > Player | ... | Target ] -> [ LastPlayerSpot | ... | Player Target ] sfx0
+[ > Player | ... | TrailBlock ] -> [ Player | ... | TrailBlock ]
 
 (don't move if we're on the target already)
 [ > Player Target ] -> [ Player Target ]
 
 (move to platform, leaving last spot)
-[ > Player | ... | Platform ] -> [ LastPlayerSpot | ... | Player PlatformUsed ] sfx0
+[ > Player | ... | Platform ] -> [ TrailBlock Prev | ... | Player PlatformUsed ] sfx0
+
+(move to target, leaving last spot)
+[ > Player | ... | Target ] -> [ TrailBlock Prev | ... | Player Target ] sfx0
 
 (don't move if there's no platform/target to reach)
 [ > Player ] -> [ Player ]
 
-
+[ Prev | ... | TrailBlock ] -> [ Prev | ... | TrailOld ]
+[ Prev ] -> [ ]
 
 ==============
 WINCONDITIONS
@@ -123,3 +134,8 @@ LEVELS
 .p.....
 .t.o.o.
 .o...o.
+
+.o....o
+.p.ooo.
+.o.....
+.t.oooo
