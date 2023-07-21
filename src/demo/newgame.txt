@@ -7,7 +7,15 @@ require_player_movement
 OBJECTS
 ========
 
-Player
+PlayerA
+Blue Green White Black
+.000.
+.010.
+01210
+33333
+.3.3.
+
+PlayerB
 Blue Red White Black
 .000.
 .010.
@@ -15,18 +23,29 @@ Blue Red White Black
 33333
 .3.3.
 
-TrailBlock
-Purple
+TrailBlockA
+Purple Green
 .000.
 0...0
+0.1.0
 0...0
+.000.
+
+TrailBlockB
+Purple Red
+.000.
+0...0
+0.1.0
 0...0
 .000.
 
 TrailOld
 Gray
 
-Prev
+PrevA
+Green
+
+PrevB
 Red
 
 Platform
@@ -61,12 +80,15 @@ LEGEND
 =======
 
 . = Background
-p = Player
+a = PlayerA
+b = PlayerB
 o = Platform
 t = Target
 
+Player = a or b
 pt = Platform or Target
-x = Player and PlatformUsed
+x = PlayerA and PlatformUsed
+y = PlayerB and PlatformUsed
 
 =======
 SOUNDS
@@ -81,21 +103,23 @@ COLLISIONLAYERS
 Background
 Platform, PlatformUsed, Target
 Player
-TrailOld, TrailBlock
-Prev
+TrailOld, TrailBlockA, TrailBlockB
+PrevA, PrevB
 
 ======
 RULES
 ======
 
 (prevent moving toward the last spot)
-[ > Player | ... | TrailBlock ] -> [ Player | ... | TrailBlock ]
+[ > PlayerA | ... | TrailBlockA ] -> [ PlayerA | ... | TrailBlockA ]
+[ > PlayerB | ... | TrailBlockB ] -> [ PlayerB | ... | TrailBlockB ]
 
 (prevent moving if we've reached the target)
 [ > Player Target ] -> [ Player Target ]
 
 (move to platform or target, leaving last spot)
-[ > Player | ... | pt ] -> [ TrailBlock Prev | ... | Player pt ] sfx0
+[ > PlayerA | ... | pt ] -> [ TrailBlockA PrevA | ... | PlayerA pt ] sfx0
+[ > PlayerB | ... | pt ] -> [ TrailBlockB PrevB | ... | PlayerB pt ] sfx0
 
 (mark platform used)
 [ Player Platform ] -> [ Player PlatformUsed ]
@@ -104,8 +128,10 @@ RULES
 [ > Player ] -> [ Player ]
 
 (remove previous blocker)
-[ Prev | ... | TrailBlock ] -> [ Prev | ... | ]
-[ Prev ] -> [ ]
+[ PrevA | ... | TrailBlockA ] -> [ PrevA | ... | ]
+[ PrevA ] -> [ ]
+[ PrevB  | ... | TrailBlockB  ] -> [ PrevB  | ... | ]
+[ PrevB  ] -> [ ]
 
 ==============
 WINCONDITIONS
@@ -169,10 +195,16 @@ ooooooo
 ooooooo
 oooooot
 
-message "Now for something more 'on theme'"
+message "Now for some 'on theme' levels"
 
 ....o.o
 tx..o.o
 ....o.o
-tx..o.o
+ty..o.o
 .......
+
+....o.o
+tx..o.o
+......t
+oo.o.y.
+oo.o..o
