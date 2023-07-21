@@ -8,12 +8,12 @@ OBJECTS
 ========
 
 Player
-Blue
+Blue Red White Black
 .000.
-00000
-00.00
-00000
-.000.
+.010.
+01210
+33333
+.3.3.
 
 TrailBlock
 Purple
@@ -25,41 +25,36 @@ Purple
 
 TrailOld
 Gray
-..0..
-.....
-0...0
-.....
-..0..
 
 Prev
 Red
 
 Platform
-Green
+Green YellowGreen
 .000.
-0...0
-0...0
-0...0
+01.10
+0.1.0
+01.10
 .000.
 
 PlatformUsed
-Green
-0...0
-.0.0.
-..0..
-.0.0.
-0...0
+Green YellowGreen
+.....
+.010.
+.101.
+.010.
+.....
 
 Target
-Red
-.000.
-0...0
-0...0
-0...0
-.000.
+Red Orange
+..0..
+.1.1.
+0.1.0
+.1.1.
+..0..
 
 Background
-Black
+DarkBrown
 
 =======
 LEGEND
@@ -123,14 +118,32 @@ All Player on Target
 LEVELS
 =======
 
+message "Hit all the platforms"
+
+message "The red/orange must be last"
+
+.......
+.xooot.
+.......
+
 ...o..t
 .x...o.
 ...o.o.
+
 
 .o.o...
 .x.....
 .t.o.o.
 .o...o.
+
+message "Be careful with your choices (z to undo)"
+
+o..o.o.
+ox.o.ot
+...o.o.
+.......
+
+message "Now for the good stuff"
 
 .o....o
 .x.ooo.
@@ -141,3 +154,17 @@ oo..o.o
 ox.ooo.
 .o.....
 .t.oooo
+
+oo..o.o
+ox.ooo.
+.t.....
+.o.oooo
+
+message "Congrats! You did it!"
+
+message "Bonus level"
+
+xoooooo
+ooooooo
+ooooooo
+oooooot
