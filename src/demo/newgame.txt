@@ -25,11 +25,11 @@ Purple
 
 TrailOld
 Gray
-.000.
-00000
-00.00
-00000
-.000.
+..0..
+.....
+0...0
+.....
+..0..
 
 Prev
 Red
@@ -71,6 +71,7 @@ o = Platform
 t = Target
 
 pt = Platform or Target
+x = Player and PlatformUsed
 
 =======
 SOUNDS
@@ -92,26 +93,23 @@ Prev
 RULES
 ======
 
-(TODO prevent going backwards)
-(TODO clear last player spot)
-
+(prevent moving toward the last spot)
 [ > Player | ... | TrailBlock ] -> [ Player | ... | TrailBlock ]
 
-(don't move if we're on the target already)
+(prevent moving if we've reached the target)
 [ > Player Target ] -> [ Player Target ]
 
-(move to platform, leaving last spot)
+(move to platform or target, leaving last spot)
 [ > Player | ... | pt ] -> [ TrailBlock Prev | ... | Player pt ] sfx0
 
-(move to target, leaving last spot)
-[ > Player | ... | pt ] -> [ TrailBlock Prev | ... | Player pt ] sfx0
+(mark platform used)
+[ Player Platform ] -> [ Player PlatformUsed ]
 
-[Player Platform] -> [Player PlatformUsed]
-
-(don't move if there's no platform/target to reach)
+(otherwise! prevent movement)
 [ > Player ] -> [ Player ]
 
-[ Prev | ... | TrailBlock ] -> [ Prev | ... | TrailOld ]
+(remove previous blocker)
+[ Prev | ... | TrailBlock ] -> [ Prev | ... | ]
 [ Prev ] -> [ ]
 
 ==============
@@ -126,15 +124,20 @@ LEVELS
 =======
 
 ...o..t
-.p...o.
+.x...o.
 ...o.o.
 
 .o.o...
-.p.....
+.x.....
 .t.o.o.
 .o...o.
 
 .o....o
-.p.ooo.
+.x.ooo.
+.o.....
+.t.oooo
+
+oo..o.o
+ox.ooo.
 .o.....
 .t.oooo
