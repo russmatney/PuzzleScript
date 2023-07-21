@@ -1,12 +1,22 @@
 title New Game
 author Russell Matney
 
+require_player_movement
+
 ========
 OBJECTS
 ========
 
 Player
 Blue
+.000.
+00000
+00.00
+00000
+.000.
+
+LastPlayerSpot
+Gray
 .000.
 00000
 00.00
@@ -20,6 +30,14 @@ Green
 0...0
 0...0
 .000.
+
+PlatformUsed
+Green
+0...0
+.0.0.
+..0..
+.0.0.
+0...0
 
 Target
 Red
@@ -38,7 +56,9 @@ LEGEND
 
 . = Background
 p = Player
+l = LastPlayerSpot
 o = Platform
+u = PlatformUsed
 t = Target
 
 pt = Platform or Target
@@ -54,23 +74,42 @@ COLLISIONLAYERS
 ================
 
 Background
-Player, pt
+Platform, PlatformUsed, Target
+Player, LastPlayerSpot
 
 ======
 RULES
 ======
 
-(TODO force finish on target)
 (TODO prevent going backwards)
+(TODO clear last player spot)
 
-[ > Player | ... | pt ] -> [ | ... | Player ] sfx0
+(clear lastplayerspot)
+[ Player | ... | LastPlayerSpot ] -> [ Player | ... | ]
+
+(prevent movement if last player spot in direction)
+[ > Player | ... | LastPlayerSpot ] -> [ Player | ... | LastPlayerSpot ] sfx0
+
+(move to target, leaving last spot)
+[ > Player | ... | Target ] -> [ LastPlayerSpot | ... | Player Target ] sfx0
+
+(don't move if we're on the target already)
+[ > Player Target ] -> [ Player Target ]
+
+(move to platform, leaving last spot)
+[ > Player | ... | Platform ] -> [ LastPlayerSpot | ... | Player PlatformUsed ] sfx0
+
+(don't move if there's no platform/target to reach)
 [ > Player ] -> [ Player ]
+
+
 
 ==============
 WINCONDITIONS
 ==============
 
-No pt
+No Platform
+All Player on Target
 
 =======
 LEVELS
@@ -82,5 +121,5 @@ LEVELS
 
 .o.o...
 .p.....
-...o.o.
+.t.o.o.
 .o...o.
