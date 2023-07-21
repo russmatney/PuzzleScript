@@ -33,11 +33,6 @@ Gray
 
 Prev
 Red
-..0..
-..0..
-00000
-..0..
-..0..
 
 Platform
 Green
@@ -75,6 +70,8 @@ p = Player
 o = Platform
 t = Target
 
+pt = Platform or Target
+
 =======
 SOUNDS
 =======
@@ -104,10 +101,12 @@ RULES
 [ > Player Target ] -> [ Player Target ]
 
 (move to platform, leaving last spot)
-[ > Player | ... | Platform ] -> [ TrailBlock Prev | ... | Player PlatformUsed ] sfx0
+[ > Player | ... | pt ] -> [ TrailBlock Prev | ... | Player pt ] sfx0
 
 (move to target, leaving last spot)
-[ > Player | ... | Target ] -> [ TrailBlock Prev | ... | Player Target ] sfx0
+[ > Player | ... | pt ] -> [ TrailBlock Prev | ... | Player pt ] sfx0
+
+[Player Platform] -> [Player PlatformUsed]
 
 (don't move if there's no platform/target to reach)
 [ > Player ] -> [ Player ]
