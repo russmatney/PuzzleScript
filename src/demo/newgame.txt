@@ -143,7 +143,7 @@ ox.o.ot
 ...o.o.
 .......
 
-message "Now for the good stuff"
+message "Show me whatcha got!"
 
 .o....o
 .x.ooo.
@@ -160,7 +160,7 @@ ox.ooo.
 .t.....
 .o.oooo
 
-message "Congrats! You did it!"
+message "Congrats! Part 1 complete!"
 
 message "Bonus level"
 
@@ -168,3 +168,11 @@ xoooooo
 ooooooo
 ooooooo
 oooooot
+
+message "Now for something more 'on theme'"
+
+....o.o
+tx..o.o
+....o.o
+tx..o.o
+.......
