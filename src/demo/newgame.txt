@@ -24,7 +24,7 @@ Blue Red White Black
 .3.3.
 
 TrailBlockA
-Purple Green
+Purple Red
 .000.
 0...0
 0.1.0
@@ -50,26 +50,26 @@ Red
 
 Platform
 Green YellowGreen
-.000.
-01.10
-0.1.0
-01.10
-.000.
+..0..
+.010.
+01011
+.010.
+..1..
 
 PlatformUsed
 Green YellowGreen
 .....
+.000.
 .010.
-.101.
-.010.
+.000.
 .....
 
 Target
 Red Orange
 ..0..
-.1.1.
-0.1.0
-.1.1.
+.101.
+00100
+.101.
 ..0..
 
 Background
@@ -156,7 +156,6 @@ message "The red/orange must be last"
 .x...o.
 ...o.o.
 
-
 .o.o...
 .x.....
 .t.o.o.
@@ -196,6 +195,12 @@ ooooooo
 oooooot
 
 message "Now for some 'on theme' levels"
+
+.......
+.xooot.
+.......
+.yooot.
+.......
 
 ....o.o
 tx..o.o
