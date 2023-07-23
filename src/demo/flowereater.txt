@@ -1,4 +1,4 @@
-title New Game
+title Flower Eater
 author Russell Matney
 
 require_player_movement
@@ -48,7 +48,7 @@ Green
 PrevB
 Red
 
-Platform
+Flower
 Green YellowGreen
 ..0..
 .010.
@@ -56,12 +56,12 @@ Green YellowGreen
 .010.
 ..1..
 
-PlatformUsed
+FlowerEaten
 Green YellowGreen
 .....
-.000.
+.100.
+.001.
 .010.
-.000.
 .....
 
 Target
@@ -82,13 +82,13 @@ LEGEND
 . = Background
 a = PlayerA
 b = PlayerB
-o = Platform
+o = Flower
 t = Target
 
 Player = a or b
-pt = Platform or Target
-x = PlayerA and PlatformUsed
-y = PlayerB and PlatformUsed
+pt = Flower or Target
+x = PlayerA and FlowerEaten
+y = PlayerB and FlowerEaten
 
 =======
 SOUNDS
@@ -101,7 +101,7 @@ COLLISIONLAYERS
 ================
 
 Background
-Platform, PlatformUsed, Target
+Flower, FlowerEaten, Target
 Player
 TrailOld, TrailBlockA, TrailBlockB
 PrevA, PrevB
@@ -114,6 +114,16 @@ RULES
 [ > PlayerA | ... | TrailBlockA ] -> [ PlayerA | ... | TrailBlockA ]
 [ > PlayerB | ... | TrailBlockB ] -> [ PlayerB | ... | TrailBlockB ]
 
+(prevent moving into the other player)
+(TODO cover more cases... this is quite hard-coded)
+[ > Player | Player ] -> [ Player | Player ]
+[ > Player | FlowerEaten | Player ] -> [ Player | FlowerEaten | Player ]
+[ > Player | FlowerEaten | FlowerEaten | Player ] -> [ Player | FlowerEaten | FlowerEaten | Player ]
+[ > Player | FlowerEaten | FlowerEaten | FlowerEaten | Player ] -> [ Player | FlowerEaten | FlowerEaten | FlowerEaten | Player ]
+[ > Player | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | Player ] -> [ Player | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | Player ]
+[ > Player | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | Player ] -> [ Player | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | Player ]
+[ > Player | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | Player ] -> [ Player | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | Player ]
+
 (prevent moving if we've reached the target)
 [ > Player Target ] -> [ Player Target ]
 
@@ -122,7 +132,7 @@ RULES
 [ > PlayerB | ... | pt ] -> [ TrailBlockB PrevB | ... | PlayerB pt ] sfx0
 
 (mark platform used)
-[ Player Platform ] -> [ Player PlatformUsed ]
+[ Player Flower ] -> [ Player FlowerEaten ]
 
 (otherwise! prevent movement)
 [ > Player ] -> [ Player ]
@@ -137,16 +147,14 @@ RULES
 WINCONDITIONS
 ==============
 
-No Platform
+No Flower
 All Player on Target
 
 =======
 LEVELS
 =======
 
-message "Hit all the platforms"
-
-message "The red/orange must be last"
+message "Eat all the flowers. The red/orange must be last."
 
 .......
 .xooot.
@@ -161,7 +169,7 @@ message "The red/orange must be last"
 .t.o.o.
 .o...o.
 
-message "Be careful with your choices (z to undo)"
+message "If you get stuck, remember z to undo"
 
 o..o.o.
 ox.o.ot
@@ -185,8 +193,6 @@ ox.ooo.
 .t.....
 .o.oooo
 
-message "Congrats! Part 1 complete!"
-
 message "Bonus level"
 
 xoooooo
@@ -194,7 +200,7 @@ ooooooo
 ooooooo
 oooooot
 
-message "Now for some 'on theme' levels"
+message "Now for something more interesting..."
 
 .......
 .xooot.
@@ -208,8 +214,19 @@ tx..o.o
 ty..o.o
 .......
 
+message "Not sure I like this one."
+
 ....o.o
 tx..o.o
 ......t
 oo.o.y.
 oo.o..o
+
+message "Final level!"
+
+xoooooy
+ooooooo
+ooooooo
+tooooot
+
+message "Thanks for playing!"
