@@ -110,9 +110,11 @@ PrevA, PrevB
 RULES
 ======
 
-(prevent moving toward the last spot)
+(prevent moving toward the last spot. TODO: undo!)
 [ > PlayerA | ... | TrailBlockA ] -> [ PlayerA | ... | TrailBlockA ]
+([ > PlayerA | ... | TrailBlockA ] -> [ Flower | ... | PlayerA ])
 [ > PlayerB | ... | TrailBlockB ] -> [ PlayerB | ... | TrailBlockB ]
+([ > PlayerB | ... | TrailBlockB ] -> [ Flower | ... | PlayerB ])
 
 (prevent moving into the other player)
 (TODO cover more cases... this is quite hard-coded)
